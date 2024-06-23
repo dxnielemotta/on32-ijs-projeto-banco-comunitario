@@ -17,6 +17,7 @@ export class Conta implements ContaInterface {
     this.verificaSaldoSuficiente(valor);
 
     this.saldo -= valor;
+    `Saque realizado! Saldo após saque: ${this.saldo}`;
   }
 
   transferir(valor: number, contaDestino: ContaInterface): void {
@@ -24,6 +25,7 @@ export class Conta implements ContaInterface {
 
     this.saldo -= valor;
     contaDestino.saldo += valor;
+    `Transferência realizado! Saldo após transferência: ${this.saldo}`;
   }
 
   protected verificaSaldoSuficiente(valor: number): void {
