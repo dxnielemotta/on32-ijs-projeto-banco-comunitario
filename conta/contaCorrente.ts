@@ -5,6 +5,12 @@ import { ContaInterface } from "./contaInterface";
 export class ContaCorrente extends Conta {
   constructor(numeroConta: string, saldo: number, cliente: Cliente) {
     super(numeroConta, saldo, cliente);
+    if (cliente.rendaSalarial < 500) {
+      console.log(
+        "Cliente não preenche os requisitos para criação de conta-corrente."
+      );
+      return;
+    }
   }
 
   sacar(valor: number): void {
