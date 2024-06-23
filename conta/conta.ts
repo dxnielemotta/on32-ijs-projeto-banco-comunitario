@@ -10,6 +10,7 @@ export class Conta implements ContaInterface {
 
   depositar(valor: number): void {
     this.saldo += valor;
+    console.log(`Depósito realizado! Saldo após depósito: ${this.saldo}`);
   }
 
   sacar(valor: number): void {

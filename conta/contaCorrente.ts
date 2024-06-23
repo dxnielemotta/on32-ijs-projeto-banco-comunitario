@@ -6,28 +6,33 @@ export class ContaCorrente extends Conta {
   constructor(numeroConta: string, saldo: number, cliente: Cliente) {
     super(numeroConta, saldo, cliente);
     if (cliente.rendaSalarial < 500) {
-      console.log(
+      throw new Error(
         "Cliente não preenche os requisitos para criação de conta-corrente."
       );
-      return;
     }
+
+    console.log(`Conta-corrente criada. Saldo atual: ${this.saldo}`);
   }
 
   sacar(valor: number): void {
     this.verificaSaldoSuficiente(valor);
     this.saldo -= valor;
+    console.log(`Saque realizado! Saldo após saque: ${this.saldo}`);
   }
 
   transferir(valor: number, contaDestino: ContaInterface): void {
     this.verificaSaldoSuficiente(valor);
     this.saldo -= valor;
     contaDestino.saldo += valor;
+
+    console.log(
+      `Transferência realizada. Saldo da conta atual após transferência: ${this.saldo}`
+    );
   }
 
   protected verificaSaldoSuficiente(valor: number): void {
     if (this.saldo + 100 < valor) {
-      console.log("Limite de cheque especial insuficiente");
-      return;
+      throw new Error("Limite de cheque especial insuficiente");
     }
   }
 }
