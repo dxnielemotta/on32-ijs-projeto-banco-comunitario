@@ -8,21 +8,20 @@ export class ContaCorrente extends Conta {
   }
 
   sacar(valor: number): void {
-    if (this.saldo + 100 < valor) {
-      console.log("Limite de cheque especial insuficiente");
-      return;
-    }
-
+    this.verificaSaldoSuficiente(valor);
     this.saldo -= valor;
   }
 
   transferir(valor: number, contaDestino: ContaInterface): void {
+    this.verificaSaldoSuficiente(valor);
+    this.saldo -= valor;
+    contaDestino.saldo += valor;
+  }
+
+  protected verificaSaldoSuficiente(valor: number): void {
     if (this.saldo + 100 < valor) {
       console.log("Limite de cheque especial insuficiente");
       return;
     }
-
-    this.saldo -= valor;
-    contaDestino.saldo += valor;
   }
 }

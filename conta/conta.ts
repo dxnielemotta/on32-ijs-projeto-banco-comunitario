@@ -13,19 +13,21 @@ export class Conta implements ContaInterface {
   }
 
   sacar(valor: number): void {
-    if (this.saldo < valor) {
-      console.log("Saldo insuficiente");
-    }
+    this.verificaSaldoSuficiente(valor);
 
     this.saldo -= valor;
   }
 
   transferir(valor: number, contaDestino: ContaInterface): void {
-    if (this.saldo < valor) {
-      console.log("Saldo insuficiente");
-    }
+    this.verificaSaldoSuficiente(valor);
 
     this.saldo -= valor;
     contaDestino.saldo += valor;
+  }
+
+  protected verificaSaldoSuficiente(valor: number): void {
+    if (this.saldo < valor) {
+      return console.log("Saldo insuficiente");
+    }
   }
 }
