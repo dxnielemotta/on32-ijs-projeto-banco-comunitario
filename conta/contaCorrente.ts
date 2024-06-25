@@ -3,6 +3,7 @@ import { Conta } from "./conta";
 import { ContaInterface } from "./contaInterface";
 
 export class ContaCorrente extends Conta {
+  private _limiteChequeEspecial: number = 100;
   constructor(numeroConta: string, saldo: number, cliente: Cliente) {
     super(numeroConta, saldo, cliente);
     if (cliente.rendaSalarial < 500) {
@@ -31,7 +32,7 @@ export class ContaCorrente extends Conta {
   }
 
   protected verificaSaldoSuficiente(valor: number): void {
-    if (this.saldo + 100 < valor) {
+    if (this.saldo + this._limiteChequeEspecial < valor) {
       throw new Error("Limite de cheque especial insuficiente");
     }
   }
